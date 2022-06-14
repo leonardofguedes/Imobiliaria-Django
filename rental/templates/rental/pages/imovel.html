@@ -1,0 +1,10 @@
+{% extends 'rental/partials/base.html' %}
+
+{% block title %}{{ imovel.title }} | {% endblock title %}
+{% block content %}
+
+<div class="main-content main-content-list container">
+    {% include 'rental/partials/unidade.html' %}
+</div>
+
+{% endblock content %}

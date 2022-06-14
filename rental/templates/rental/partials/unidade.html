@@ -1,0 +1,74 @@
+<div class="imovel imovel-list-item">
+
+
+    {% if is_detail_page is True %}
+
+    {% include 'rental/partials/detail_page_photos.html' %}
+
+    {% else %}
+
+    {% if imovel.cover %}
+    <div class="imovel-cover">
+        <a href="{% url 'imoveis-house' imovel.pk %}">
+        <img src="{{ imovel.cover.url }}" alt="Temporário">
+        </a>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <div class="imovel-author">
+        <span class="imovel-author-item">
+            <i class="fas fa-user"></i>
+            {{ imovel.author.first_name }} {{ imovel.author.last_name}}
+        </span>
+        <span class="imovel-author-item">
+            <i class="fas fa-calendar-alt"></i>
+            {{ imovel.created_at|date:"d/m/Y" }} às {{ imovel.created_at|date:"H:i" }}
+        </span>
+        <span class="imovel-author-item">
+            <a href="/rental/category/cafe-da-manha/">
+                <i class="fas fa-bed"></i>
+                <span>{{ imovel.category.name }}</span>
+            </a>
+        </span>
+    </div>
+
+    <div class="imovel-content">
+        <p>{{ imovel.title }}</p>
+        <p>Rua: {{ imovel.street }}</p>
+        <p>Bairro: {{ imovel.district }} </p>
+        <p>Cidade: {{ imovel.city }}</p>
+        <p>Área total: {{ imovel.area}}{{ imovel.area.type }} m²</p>
+    </div>
+
+    <div class="imovel-meta-container">
+        <div class="imovel-meta recipe-preparation">
+            <h3 class="imovel-meta-title"><i class="fas fa-money-bill"></i> Financiável</h3>
+            <div class="imovel-meta-text">
+                {{ imovel.financible }}
+            </div>
+        </div>
+        <div class="imovel-meta recipe-servings">
+            <h3 class="imovel-meta-title"><i class="fas fa-brazilian-real-sign"></i> Valor</h3>
+            <div class="imovel-meta-text">
+                {{ imovel.price }}
+            </div>
+        </div>
+    </div>
+
+    {% if is_detail_page is not True %}
+    <footer class="imovel-footer">
+        <a class="imovel-read-more button button-dark button-full-width" href="{% url 'imoveis-house' imovel.category_id %}">
+            <i class="fas fa-eye"></i>
+            <span>ver mais...</span>
+        </a>
+    </footer>
+    {% endif %}
+
+    {% if is_detail_page is True %}
+        <div class="imovel-description">
+            {{ imovel.description|linebreaksbr }}
+        </div>
+    {% endif %}
+
+</div>

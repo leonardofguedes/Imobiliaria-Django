@@ -1,0 +1,11 @@
+    {% include 'rental/partials/head.html' %}
+    <title>{% block title %}{% endblock title %} Imóvel</title>
+
+<body>
+    {% include 'rental/partials/header.html' %}
+    {% include 'rental/partials/search.html' %}
+    <main class="main-content-container">
+        {% block content %}{% endblock content %}
+    </main>
+    {% include 'rental/partials/footer.html' %}
+</body>

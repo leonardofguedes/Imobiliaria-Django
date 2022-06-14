@@ -1,0 +1,15 @@
+<div class="imovel-cover">
+        <a href="{% url 'imoveis-house' imovel.pk %}">
+            {% if imovel.photo.main_photo %}
+            <img src="{{ imovel.photo.main_photo.url }}" alt="Temporário">
+            {% endif %}
+            {% if imovel.photo.second_photo %}
+            <img src="{{ imovel.photo.second_photo.url }}" alt="Temporário">
+            {% endif %}
+            {% if imovel.photo.fourth_photo %}
+            <img src="{{ imovel.photo.fourth_photo.url }}" alt="Temporário">
+            {% endif %}
+            {% if imovel.photo.third_photo %}
+            <img src="{{ imovel.photo.third_photo.url }}" alt="Temporário">
+            {% endif %}
+        </a>
