@@ -19,9 +19,12 @@ pip install -r requirements.txt
 ```
 
 
-## ⚙️ Executando os testes
+## ⚙️ Pendências
 
-[[ ETAPA AINDA NÃO COMPLETADA ]]
+1. Sistema de testes
+2. Aplicação de funcionalidades a search bar
+3. Criação do menu
+4. Criação do login do usuário
 
 
 ## 🛠️ Construído com
