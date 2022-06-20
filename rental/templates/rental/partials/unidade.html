@@ -58,7 +58,7 @@
 
     {% if is_detail_page is not True %}
     <footer class="imovel-footer">
-        <a class="imovel-read-more button button-dark button-full-width" href="{% url 'imoveis-house' imovel.category_id %}">
+        <a class="imovel-read-more button button-dark button-full-width" href="{% url 'imoveis-house' imovel.pk %}">
             <i class="fas fa-eye"></i>
             <span>ver mais...</span>
         </a>
