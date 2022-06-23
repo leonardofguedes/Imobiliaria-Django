@@ -38,8 +38,8 @@ class Imovel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='imoveis/covers/%Y/%m/%d/')
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='photos', null=True)
+    cover = models.ImageField(upload_to='imoveis/covers/%Y/%m/%d/', blank=True, default='')
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='photos', null=True, blank=True, default='')
     category = models.ForeignKey(
         Category, on_delete=models.SET_NULL, null=True, blank=True, default=None
     )

@@ -4,7 +4,9 @@ from django.http import Http404
 
 
 def home(request):
-    imoveis = Imovel.objects.all()
+    imoveis = Imovel.objects.filter(
+        is_published=True
+    ).order_by('-category_id')
     return render(request, 'rental/pages/home.html',
                   context={'imoveis': imoveis,}
                   )
