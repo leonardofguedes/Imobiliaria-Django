@@ -86,3 +86,13 @@ class RentalViewTest(RentalTestBase):
                             ))
         # Checando se a menssagem do template aparece
         self.assertEqual(response.status_code, 404)
+
+    def test_rental_search_uses_correct_view_function(self):
+        """Testando se a view de search está correta // TDD"""
+        resolved = resolve(reverse('search'))
+        self.assertIs(resolved.func, views.search)
+
+    def test_rental_search_loads_correct_template(self):
+        """Teste para conferir se o template de search está sendo carregado"""
+        response = self.client.get(reverse('search'))
+        self.assertTemplateUsed(response, 'rental/pages/search.html')

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Imovel, Category
+from .models import Imovel
 from django.http import Http404
 
 
@@ -30,3 +30,6 @@ def imovel(request, category_id):
         'title': f'{imovel.category.name} - Imobiliaria Girassol ',
         'is_detail_page': True,
     })
+
+def search(request):
+    return render(request, 'rental/pages/search.html')
