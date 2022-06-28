@@ -1,0 +1,15 @@
+{% extends 'rental/partials/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock title %}
+{% block content %}
+
+<div class="main-content main-content-list container">
+    {% for imovel in imoveis %}
+        {% include 'rental/partials/unidade.html' %}
+    {% empty %}
+    <div class="center">
+        <h1>Nenhum imóvel cadastrado ainda</h1>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
