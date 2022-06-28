@@ -42,8 +42,3 @@ o melhor possível. Obs: Estou buscando um parceiro para trabalhar nessa parte. 
 
 Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
 
-## 🎁 Agradecimentos
-
-* Esse projeto faz parte de uma grande plano que tenho de fazer 7 bilhões de web pages até 2035. Sim, 1 site para cada pessoa da terra. 📢
-* É brincadeira a parte de cima: o plano é 10.000 horas de programação, até eu poder finalmente receber a faixa azul da modalidade 🍺 
-* Se você leu até aqui é porque você está com muito tempo sobrando. Ou porque não deixa passar nenhum detalhe na vida, é perfeccionista. Acredite em mim: adotar um cachorro resolve os dois casos  🤓.
