@@ -1,0 +1,4 @@
+[run]
+include = */rental/*
+branch = True
+omit = venv/*,manage.py,

@@ -10,7 +10,7 @@ class SearchViewTest(RentalTestBase):
         self.assertIs(resolved.func, views.search)
 
     def test_rental_search_loads_correct_template(self):
-        """Teste para conferir se o template de search está sendo carregado"""
+        """Testando para conferir se o template de search está sendo carregado"""
         response = self.client.get(reverse('search') + '?q=teste')
         self.assertTemplateUsed(response, 'rental/pages/search.html')
 
@@ -33,7 +33,6 @@ class SearchViewTest(RentalTestBase):
         """Criaremos duas unidades com titulo diferente e buscaremos ambas no search
         No segundo caso, testando a unidade contrária.
         No terceiro caso, testando perante uma queryset vazia.
-
         """
         title1 = 'This is Home 1'
         title2 = 'This is Home 2'

@@ -2,13 +2,15 @@ from .test_base import RentalTestBase, Imovel
 from django.core.exceptions import ValidationError
 from parameterized import parameterized
 
+
 class RentalModelTeste(RentalTestBase):
     def setUp(self) -> None:
         self.rental = self.make_imovel()
         return super().setUp()
 
     def test_imovel_title_if_has_more_than_65_chars(self):
-        self.rental.title = 'Titulo'*65
+        """Teste falhará apenas se não houver erro, que no caso existe, pq o limite do title é 65 chars"""
+        self.rental.title = 'Titulo'*85
         with self.assertRaises(ValidationError):
             self.rental.full_clean()
 
@@ -56,12 +58,23 @@ class RentalModelTeste(RentalTestBase):
         )
 
     def test_home_string_representation(self):
-        """Testando a representação em String do nome do Animal"""
+        """Testando a representação em String do nome do Imóvel"""
         needed = 'Testing Representation'
         self.rental.title = 'Testing Representation'
         self.rental.full_clean()
         self.rental.save()
         self.assertEqual(
             str(self.rental), needed,
-            msg=f'Animal string representation must be {needed} but'
+            msg=f'Imovel string representation must be {needed} but'
                 f'{str(self.rental)} was received')
+
+    def test_category_string_representation(self):
+        """Testando a representação em String da Categoria do Imóvel"""
+        needed = 'Testing Representation'
+        self.rental.category.name = 'Testing Representation'
+        self.rental.full_clean()
+        self.rental.save()
+        self.assertEqual(
+            str(self.rental.category.name), needed,
+            msg=f'Category string representation must be {needed} but'
+                f'{str(self.rental.category.name)} was received')
