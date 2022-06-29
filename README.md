@@ -21,8 +21,8 @@ pip install -r requirements.txt
 
 ## ⚙️ Pendências
 
-1. Sistema de testes
-2. Aplicação de funcionalidades a search bar
+1. Sistema de testes [CUMPRIDO]
+2. Aplicação de funcionalidades a search bar [CUMPRIDO]
 3. Criação do menu
 4. Criação do login do usuário
 
