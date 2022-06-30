@@ -2,25 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import Imovel
 from django.http import Http404
 from django.db.models import Q
-from django.core.paginator import Paginator
-from utils.pagination import make_pagination_range
+from utils.pagination import make_pagination
+import os
 
+PER_PAGE = os.environ.get('PER_PAGE', 6)
 
 def home(request):
     imoveis = Imovel.objects.filter(
         is_published=True
     ).order_by('-category_id')
-    try:
-        current_page = int(request.GET.get('page', 1))
-    except ValueError:
-        current_page = 1
-    paginator = Paginator(imoveis, 9)
-    page_obj = paginator.get_page(current_page)
-    pagination_range = make_pagination_range(
-        paginator.page_range,
-        4,
-        current_page
-    )
+    page_obj, pagination_range = make_pagination(request, imoveis, PER_PAGE)
     return render(request, 'rental/pages/home.html',
                   context={
                       'imoveis': page_obj,
@@ -29,15 +20,6 @@ def home(request):
 
 
 def imovel(request, category_id):
-    """
-    imovel = Imovel.objects.filter(
-        pk = category_id
-    ).order_by('-id').first()
-    return render(request, 'rental/pages/imovel.html', context={
-        'imovel': imovel,
-        'is_detail_page': True,
-    })
-    """
     imovel = get_object_or_404(Imovel, pk=category_id, is_published=True,)
     return render(request, 'rental/pages/imovel.html', context={
         'imovel': imovel,
@@ -57,8 +39,11 @@ def search(request):
             Q(city__icontains=search_term),
         ), is_published=True
     ).order_by('-id')
+    page_obj, pagination_range = make_pagination(request, imoveis, PER_PAGE)
     return render(request, 'rental/pages/search.html', {
         'page_title': f'Search for "{search_term}" | Imóveis',
         'search_term': search_term,
-        'imoveis': imoveis,
+        'imoveis': page_obj,
+        'pagination_range': pagination_range,
+        'additional_url_query': f'&q={search_term}',
     })
