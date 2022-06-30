@@ -5,7 +5,8 @@ from django.db.models import Q
 from utils.pagination import make_pagination
 import os
 
-PER_PAGE = os.environ.get('PER_PAGE', 6)
+PER_PAGE = int(os.environ.get('PER_PAGE', 6))
+
 
 def home(request):
     imoveis = Imovel.objects.filter(
