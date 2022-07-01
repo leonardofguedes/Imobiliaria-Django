@@ -67,3 +67,18 @@ class RentalViewTest(RentalTestBase):
         imoveis = response.context['imoveis']
         paginator = imoveis.paginator
         self.assertEqual(paginator.num_pages, 2)
+
+
+    def test_home_first_page_is_paginated_defined(self):
+        """Testando se a primeira página de Home recebe 3 imóveis
+           Utilizando Patch(PERPAGE = 3) de uma outra maneira"""
+        from rental.views import Imovel
+        for i in range(18):
+            kwargs = {'author_data': {'username': f'u{i}'}, 'slug': f'r{i}'}
+            self.make_imovel(**kwargs)
+
+        with patch('rental.views.PER_PAGE', new=3):
+            response = self.client.get(reverse('imobiliaria-home'))
+            imoveis = response.context['imoveis']
+            paginator = imoveis.paginator
+            self.assertEqual(len(paginator.get_page(1)), 3)
