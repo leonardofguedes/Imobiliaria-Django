@@ -12,7 +12,9 @@ def home(request):
     imoveis = Imovel.objects.filter(
         is_published=True
     ).order_by('-category_id')
+
     page_obj, pagination_range = make_pagination(request, imoveis, PER_PAGE)
+
     return render(request, 'rental/pages/home.html',
                   context={
                       'imoveis': page_obj,
