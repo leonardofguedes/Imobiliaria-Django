@@ -43,3 +43,14 @@ class RentalViewTest(RentalTestBase):
         self.assertIn(
             '<h1>Nenhum imóvel cadastrado ainda</h1>',
             response.content.decode('utf-8'))
+
+    def test_home_is_paginated_default(self):
+        """Testando se a Home recebe paginação Obs: pelo default do PERPAGE são 6 por página"""
+        for i in range(12):
+            kwargs = {'author_data':{'username': f'u{i}'}, 'slug': f'r{i}'}
+            self.make_imovel(**kwargs)
+
+        response = self.client.get(reverse('imobiliaria-home'))
+        imoveis = response.context['imoveis']
+        paginator = imoveis.paginator
+        self.assertEqual(paginator.num_pages, 2)
