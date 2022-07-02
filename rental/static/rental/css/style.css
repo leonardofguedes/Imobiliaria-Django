@@ -368,3 +368,10 @@
           background: var(--color-primary-dark);
           color: var(--color-white);
         }
+        @media (max-width: 600px) {
+        .main-content-list {
+        .main-content-list,
+        .form-content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+        }
+        }
