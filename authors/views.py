@@ -12,6 +12,9 @@ def register_view(request):
 
 
 def register_create(request):
+    """Esse métododo view não carregará templates;
+       Ela apenas lê dados, confere-os e manda os dados para o register_view
+    """
     if not request.POST:
         raise Http404()
 
