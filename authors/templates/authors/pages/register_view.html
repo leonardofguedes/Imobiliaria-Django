@@ -7,6 +7,8 @@
     <h2>Register</h2>
   </div>
 
+{% include 'rental/partials/messages.html' %}
+
   <div class="main-content container">
     <form action="{% url 'authors:create' %}" method="POST">
       {% csrf_token %}
