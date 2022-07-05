@@ -123,3 +123,8 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.form_data['password'] = '@A123abc123'
         self.form_data['password2'] = '@A123abc123'
         url = reverse('authors:create')
+
+    def test_send_get_request_to_registration_create_view_returns_404(self):
+        url = reverse('authors:create')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
