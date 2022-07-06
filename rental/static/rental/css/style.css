@@ -375,3 +375,15 @@
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
         }
         }
+        .inline-form {
+          display: inline;
+        }
+
+        .plaintext-button {
+          display: inline;
+          border: none;
+          background: none;
+          cursor: pointer;
+          color: var(--color-primary);
+          font-size: 1.6rem;
+        }
