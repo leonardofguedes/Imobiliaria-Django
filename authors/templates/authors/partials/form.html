@@ -1,5 +1,5 @@
 <div class="main-content container">
-    <form action="{% url 'authors:create' %}" method="POST">
+    <form action="{{  form_action  }}" method="POST">
       {% csrf_token %}
 
       <div class="form-content form-content-grid">
