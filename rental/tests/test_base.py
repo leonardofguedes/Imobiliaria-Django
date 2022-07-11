@@ -58,7 +58,11 @@ class RentalMixin:
     def make_home_in_batch(self, qtd=10):
         homes = []
         for h in range(qtd):
-            kwargs = {'slug': f'h-o-m{h}', 'author_data': {'username': f'u{h}'}}
+            kwargs = {
+                'title': f'Home Title {h}',
+                'slug': f'h-o-m{h}',
+                'author_data': {'username': f'u{h}'}
+            }
             home = self.make_imovel(**kwargs)
             homes.append(home)
         return homes
