@@ -1,9 +1,10 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from utils.browser import make_chrome_browser
 import time
+from rental.tests.test_base import RentalMixin
 
 
-class BaseFunctionalTest(StaticLiveServerTestCase):
+class BaseFunctionalTest(StaticLiveServerTestCase, RentalMixin):
     def setUp(self) -> None:
         self.browser = make_chrome_browser()
         return super().setUp()

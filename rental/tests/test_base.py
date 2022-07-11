@@ -3,10 +3,7 @@ from rental.models import Category, Imovel
 from django.contrib.auth.models import User
 
 
-class RentalTestBase(TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
-
+class RentalMixin:
     def make_category(self, name='Category'):
         return Category.objects.create(name=name)
 
@@ -57,3 +54,8 @@ class RentalTestBase(TestCase):
             city=city,
             is_published=is_published,
         )
+
+
+class RentalTestBase(TestCase, RentalMixin):
+    def setUp(self) -> None:
+        return super().setUp()
