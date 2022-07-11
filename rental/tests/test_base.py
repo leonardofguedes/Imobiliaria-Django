@@ -55,6 +55,13 @@ class RentalMixin:
             is_published=is_published,
         )
 
+    def make_home_in_batch(self, qtd=10):
+        homes = []
+        for h in range(qtd):
+            kwargs = {'slug': f'h-o-m{h}', 'author_data': {'username': f'u{h}'}}
+            home = self.make_imovel(**kwargs)
+            homes.append(home)
+        return homes
 
 class RentalTestBase(TestCase, RentalMixin):
     def setUp(self) -> None:
