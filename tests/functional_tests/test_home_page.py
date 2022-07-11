@@ -39,3 +39,23 @@ class HomePageFunctionalTest(BaseFunctionalTest):
             title_needed,
             self.browser.find_element(By.CLASS_NAME, 'main-content-list').text,
         )
+
+    @patch('rental.views.PER_PAGE', new=2)
+    def test_home_page_pagination(self):
+        homes = self.make_home_in_batch()
+
+        #User abre a página
+        self.browser.get(self.live_server_url)
+
+        #Veja se há paginação e clica na página 2
+        page2 = self.browser.find_element(
+            By.XPATH,
+            '//a[@aria-label="Go to page 2"]'
+        )
+        page2.click()
+
+        # Averigua se existem mais 2 imóveis na página 2
+        self.assertEqual(
+            len(self.browser.find_elements(By.CLASS_NAME, 'imovel')),
+            2
+        )
