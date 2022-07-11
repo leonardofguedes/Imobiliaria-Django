@@ -13,6 +13,6 @@ class BaseFunctionalTest(StaticLiveServerTestCase, RentalMixin):
         self.browser.quit()
         return super().tearDown()
 
-    def sleep(self, seconds=5):
+    def sleep(self, seconds=35):
         """Apenas para que dê tempo e possamos ver o teste sendo feito no browser"""
         time.sleep(seconds)
