@@ -1,4 +1,4 @@
 [run]
 include = */rental/*, */authors/*
 branch = True
-omit = venv/*,manage.py,
+omit = venv/*,**/*test*.py,manage.py,__localcode/*,utils/browser.py
