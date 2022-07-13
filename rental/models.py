@@ -23,7 +23,7 @@ class Imovel(models.Model):
     )
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=265)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField()
     financible = models.CharField(choices=FINAN, blank=False, null=False, default='U', max_length=15)
     area = models.IntegerField()
     price = MoneyField(

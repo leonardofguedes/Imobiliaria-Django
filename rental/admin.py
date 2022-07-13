@@ -17,7 +17,7 @@ class ImovelAdmin(admin.ModelAdmin):
     list_editable = 'is_published',
     ordering = '-id',
     prepopulated_fields = {
-        "slug": ('title',)
+        "slug": ('title','city',)
     }
 admin.site.register(Photo)
 admin.site.register(Category, CategoryAdmin)

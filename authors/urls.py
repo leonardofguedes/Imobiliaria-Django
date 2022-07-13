@@ -11,6 +11,11 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path(
+        'dashboard/imovel/delete/',
+        views.dashboard_imovel_delete,
+        name='dashboard_imovel_delete'
+    ),
+    path(
         'dashboard/imovel/new/',
         views.dashboard_imovel_new,
         name='dashboard_imovel_new'

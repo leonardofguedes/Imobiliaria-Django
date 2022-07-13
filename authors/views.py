@@ -163,3 +163,24 @@ def dashboard_imovel_new(request):
             'form_action': reverse('authors:dashboard_imovel_new')
         }
     )
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_imovel_delete(request):
+    if not request.POST:
+        raise Http404()
+
+    POST = request.POST
+    id = POST.get('id')
+
+    imovel = Imovel.objects.filter(
+        is_published=False,
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not imovel:
+        raise Http404()
+
+    imovel.delete()
+    messages.success(request, 'Deleted successfully.')
+    return redirect(reverse('authors:dashboard'))

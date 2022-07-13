@@ -26,7 +26,7 @@ def imovel(request, category_id):
     imovel = get_object_or_404(Imovel, pk=category_id, is_published=True,)
     return render(request, 'rental/pages/imovel.html', context={
         'imovel': imovel,
-        'title': f'{imovel.category.name} - Imobiliaria Girassol ',
+        'title': f'{imovel.title} - Imobiliaria Girassol ',
         'is_detail_page': True,
     })
 
