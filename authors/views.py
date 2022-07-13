@@ -134,3 +134,32 @@ def dashboard_imovel_edit(request, id):
             'form': form
         }
     )
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_imovel_new(request):
+    form = AuthorImovelForm(
+        data=request.POST or None,
+        files=request.FILES or None,
+    )
+
+    if form.is_valid():
+        imovel: Imovel = form.save(commit=False)
+
+        imovel.author = request.user
+        imovel.is_published = False
+
+        imovel.save()
+
+        messages.success(request, 'Salvo com sucesso!')
+        return redirect(
+            reverse('authors:dashboard_imovel_edit', args=(imovel.id,))
+        )
+
+    return render(
+        request,
+        'authors/pages/dashboard_imovel.html',
+        context={
+            'form': form,
+            'form_action': reverse('authors:dashboard_imovel_new')
+        }
+    )

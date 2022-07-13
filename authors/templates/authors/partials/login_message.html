@@ -3,7 +3,7 @@
   Your are logged in with 
   {{ request.user.username }}.
   <a href="{% url 'authors:dashboard' %}">Veja seus imóveis</a>,
-  <a href="{% url 'authors:dashboard_recipe_new' %}">Crie um novo imóvel</a> or
+  <a href="{% url 'authors:dashboard_imovel_new' %}">Crie um novo imóvel</a> or
   <form class="inline-form" action="{% url 'authors:logout' %}" method='POST'>
     {% csrf_token %}
     <input type="hidden" name="username" value="{{ request.user.username }}">
