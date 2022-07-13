@@ -6,6 +6,22 @@
   <div class="main-content center container">
     <h2>Dashboard ({{ user }})</h2>
     {% include 'authors/partials/login_message.html' %}
+
+    <div class="authors-dashboard-container">
+      <h3>Seus imóveis</h3>
+
+      <ul>
+        {% for imovel in imoveis %}
+        <li>
+          <a href="#">{{ imovel.title }}</a>
+        </li>
+        {% empty %}
+          <li>
+            <p>Nenhum imóvel cadastrado ainda por esse usuário.</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
   {% include 'rental/partials/messages.html' %}
