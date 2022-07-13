@@ -9,5 +9,7 @@
   </div>
 
   {% include 'rental/partials/messages.html' %}
+  {% if not user.is_authenticated %}
   {% include 'authors/partials/form.html' %}
+  {% endif %}
 {% endblock content %}
