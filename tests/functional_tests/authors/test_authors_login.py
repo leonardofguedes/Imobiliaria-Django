@@ -58,11 +58,59 @@ class AuthorsLoginTest(AuthorsBaseTest):
         username.send_keys(' ')
         password.send_keys(' ')
 
+        def test_form_login_invalid_credentials(self):
+            # Usuário abre a página de login
+            self.browser.get(
+                self.live_server_url + reverse('authors:login')
+            )
+
+            # Usuário vê o formulário de login
+            form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+            # E tenta enviar valores com dados que não correspondem
+            username = self.get_by_placeholder(form, 'Type your username')
+            password = self.get_by_placeholder(form, 'Type your password')
+            username.send_keys('invalid_user')
+            password.send_keys('invalid_password')
+
+            # Envia o formulário
+            form.submit()
+
+            # Vê uma mensagem de erro na tela
+            self.assertIn(
+                'Invalid credentials',
+                self.browser.find_element(By.TAG_NAME, 'body').text
+            )
+
         # Envia o formulário
         form.submit()
 
         # Vê uma mensagem de erro na tela
         self.assertIn(
             'Invalid username or password',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
+
+    def test_form_login_invalid_credentials(self):
+        # Usuário abre a página de login
+        self.browser.get(
+            self.live_server_url + reverse('authors:login')
+        )
+
+        # Usuário vê o formulário de login
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+        # E tenta enviar valores com dados que não correspondem
+        username = self.get_by_placeholder(form, 'Type your username')
+        password = self.get_by_placeholder(form, 'Type your password')
+        username.send_keys('invalid_user')
+        password.send_keys('invalid_password')
+
+        # Envia o formulário
+        form.submit()
+
+        # Vê uma mensagem de erro na tela
+        self.assertIn(
+            'Invalid credentials',
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
