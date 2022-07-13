@@ -13,7 +13,7 @@
       <ul>
         {% for imovel in imoveis %}
         <li>
-          <a href="#">{{ imovel.title }}</a>
+          <a href="{% url 'authors:dashboard_imovel_edit' imovel.id %}">{{ imovel.title }}</a>
         </li>
         {% empty %}
           <li>

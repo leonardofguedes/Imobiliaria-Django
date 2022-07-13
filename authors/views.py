@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rental.models import Imovel
+from authors.forms.imovel_form import AuthorImovelForm
 
 
 def register_view(request):
@@ -95,3 +96,27 @@ def dashboard(request):
     return render(request, 'authors/pages/dashboard.html',
         context={'imoveis': imoveis,}
                   )
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_imovel_edit(request, id):
+    imovel = Imovel.objects.filter(
+        is_published=False,
+        author=request.user,
+        pk=id,
+    ).first()
+
+    if not imovel:
+        raise Http404()
+
+    form = AuthorImovelForm(
+        data=request.POST or None,
+        instance=imovel
+    )
+
+    return render(
+        request,
+        'authors/pages/dashboard_imovel.html',
+        context={
+            'form': form
+        }
+    )
