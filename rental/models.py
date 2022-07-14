@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from djmoney.models.fields import MoneyField
 from django.urls import reverse
+from django.utils.text import slugify
+
 
 class Category(models.Model):
     name = models.CharField(max_length=65)
@@ -23,7 +25,7 @@ class Imovel(models.Model):
     )
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=265)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     financible = models.CharField(choices=FINAN, blank=False, null=False, default='U', max_length=15)
     area = models.IntegerField()
     price = MoneyField(
@@ -52,3 +54,9 @@ class Imovel(models.Model):
 
     def get_absolute_url(self):
        return reverse('imoveis-house', args=(self.category_id,))
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            slug = slugify(f'{self.title}+(-{self.district})+(-{self.city}')
+            self.slug = slug
+        return super().save(*args, **kwargs)
