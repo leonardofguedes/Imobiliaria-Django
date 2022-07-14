@@ -5,6 +5,7 @@ from collections import defaultdict
 from django.core.exceptions import ValidationError
 from utils.strings import is_positive_number
 
+
 class AuthorImovelForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
