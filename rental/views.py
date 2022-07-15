@@ -4,7 +4,7 @@ from django.http import Http404
 from django.db.models import Q
 from utils.pagination import make_pagination
 import os
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
@@ -44,6 +44,10 @@ class ListViewSearch(ListViewBase):
 
     def get_queryset(self, *args, **kwargs):
         search_term = self.request.GET.get('q', '')
+
+        if not search_term:
+            raise Http404()
+
         qs = super().get_queryset(*args, **kwargs)
         qs = qs.filter(
             Q(
@@ -65,10 +69,15 @@ class ListViewSearch(ListViewBase):
         })
         return ctx
 
-def imovel(request, category_id):
-    imovel = get_object_or_404(Imovel, pk=category_id, is_published=True,)
-    return render(request, 'rental/pages/imovel.html', context={
-        'imovel': imovel,
-        'title': f'{imovel.title} - Imobiliaria Girassol ',
-        'is_detail_page': True,
-    })
+class Detail(DetailView):
+    model = Imovel
+    context_object_name = 'imovel'
+    template_name = 'rental/pages/imovel.html'
+
+    def get_context_data(self,*args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        ctx.update(
+            {'is_detail_page': True}
+        )
+        return ctx
+

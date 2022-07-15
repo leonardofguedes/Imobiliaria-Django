@@ -7,6 +7,6 @@ from . import views
 urlpatterns = [
     path('', views.ListViewBase.as_view(), name="imobiliaria-home"),
     path('imovel/search/', views.ListViewSearch.as_view(), name='search'),
-    path('imovel/<int:category_id>/', views.imovel, name='imoveis-house'),
+    path('imovel/<int:pk>/', views.Detail.as_view(), name='imoveis-house'),
 ]
 
