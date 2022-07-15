@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import home, imovel, search
+from . import views
 
 
 #app_name = 'rental'
 
 urlpatterns = [
-    path('imovel/search/', search, name='search'),
-    path('', home, name='imobiliaria-home'),
-    path('imovel/<int:category_id>/', imovel, name='imoveis-house'),
+    path('', views.ListViewBase.as_view(), name="imobiliaria-home"),
+    path('imovel/search/', views.search, name='search'),
+    path('imovel/<int:category_id>/', views.imovel, name='imoveis-house'),
 ]
 
