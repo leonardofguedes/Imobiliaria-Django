@@ -4,7 +4,6 @@ from django.http import Http404
 from django.db.models import Q
 from utils.pagination import make_pagination
 import os
-from typing import List
 from django.views.generic import ListView
 
 
@@ -36,6 +35,9 @@ class ListViewBase(ListView):
              }
         )
         return ctx
+
+class ListViewHome(ListViewBase):
+    template_name = 'rental/pages/home.html'
 
 def home(request):
     imoveis = Imovel.objects.filter(
