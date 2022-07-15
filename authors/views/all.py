@@ -97,43 +97,6 @@ def dashboard(request):
         context={'imoveis': imoveis,}
                   )
 
-@login_required(login_url='authors:login', redirect_field_name='next')
-def dashboard_imovel_edit(request, id):
-    imovel = Imovel.objects.filter(
-        is_published=False,
-        author=request.user,
-        pk=id,
-    ).first()
-
-    if not imovel:
-        raise Http404()
-
-    form = AuthorImovelForm(
-        data=request.POST or None,
-        files=request.FILES or None,
-        instance=imovel
-    )
-
-    if form.is_valid():
-        # Agora, o form é válido e eu posso tentar salvar
-        recipe = form.save(commit=False)
-
-        recipe.author = request.user
-        recipe.preparation_steps_is_html = False
-        recipe.is_published = False
-
-        recipe.save()
-
-        messages.success(request, 'Sua receita foi salva com sucesso!')
-        return redirect(reverse('authors:dashboard_imovel_edit', args=(id,)))
-
-    return render(
-        request,
-        'authors/pages/dashboard_imovel.html',
-        context={
-            'form': form
-        }
-    )
 
 @login_required(login_url='authors:login', redirect_field_name='next')
 def dashboard_imovel_new(request):
