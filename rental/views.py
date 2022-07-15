@@ -39,19 +39,31 @@ class ListViewBase(ListView):
 class ListViewHome(ListViewBase):
     template_name = 'rental/pages/home.html'
 
-def home(request):
-    imoveis = Imovel.objects.filter(
-        is_published=True
-    ).order_by('-category_id')
+class ListViewSearch(ListViewBase):
+    template_name = 'rental/pages/search.html'
 
-    page_obj, pagination_range = make_pagination(request, imoveis, PER_PAGE)
+    def get_queryset(self, *args, **kwargs):
+        search_term = self.request.GET.get('q', '')
+        qs = super().get_queryset(*args, **kwargs)
+        qs = qs.filter(
+            Q(
+                Q(title__icontains=search_term) |
+                Q(description__icontains=search_term) |
+                Q(city__icontains=search_term) |
+                Q(district__icontains=search_term),
+            )
+        )
+        return qs
 
-    return render(request, 'rental/pages/home.html',
-                  context={
-                      'imoveis': page_obj,
-                      'pagination_range': pagination_range,
-                  })
-
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        search_term = self.request.GET.get('q','')
+        ctx.update({
+            'page_title': f'Procure por "{search_term}" |',
+            'search_term': search_term,
+            'additional_url_query': f'&q={search_term}',
+        })
+        return ctx
 
 def imovel(request, category_id):
     imovel = get_object_or_404(Imovel, pk=category_id, is_published=True,)
@@ -59,25 +71,4 @@ def imovel(request, category_id):
         'imovel': imovel,
         'title': f'{imovel.title} - Imobiliaria Girassol ',
         'is_detail_page': True,
-    })
-
-
-def search(request):
-    search_term = request.GET.get('q', '').strip()
-    if not search_term:
-        raise Http404()
-    imoveis = Imovel.objects.filter(
-        Q(
-            Q(title__icontains=search_term) |
-            Q(description__icontains=search_term) |
-            Q(city__icontains=search_term),
-        ), is_published=True
-    ).order_by('-id')
-    page_obj, pagination_range = make_pagination(request, imoveis, PER_PAGE)
-    return render(request, 'rental/pages/search.html', {
-        'page_title': f'Search for "{search_term}" | Imóveis',
-        'search_term': search_term,
-        'imoveis': page_obj,
-        'pagination_range': pagination_range,
-        'additional_url_query': f'&q={search_term}',
     })
