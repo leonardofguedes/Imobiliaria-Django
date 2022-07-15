@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.urls import reverse, resolve
+from django.urls import reverse
 
 
 class RentalURLTest(TestCase):
@@ -10,7 +10,7 @@ class RentalURLTest(TestCase):
 
     def test_rental_detail_page_url_is_correct(self):
         """Testando se a URL de um imóvel único é chamada"""
-        url = reverse('imoveis-house', kwargs={'category_id':1})
+        url = reverse('imoveis-house', kwargs={'pk':1})
         self.assertEqual(url, '/imovel/1/')
 
     def test_rental_search_url_is_correct(self):
