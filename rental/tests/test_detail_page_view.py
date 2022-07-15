@@ -8,7 +8,7 @@ class TestDetailPage(RentalTestBase):
         """Testando se a detail page carrega o template correto"""
         self.make_imovel(title='Detail Page test')
         response = self.client.get(reverse('imoveis-house', kwargs={
-            'category_id': 1}
+            'pk': 1}
             ))
         content = response.content.decode('utf-8')
         self.assertIn('Detail Page test', content)
@@ -17,21 +17,21 @@ class TestDetailPage(RentalTestBase):
         """Testando caso o is_published não seja True na detail page"""
         imovel = self.make_imovel(is_published=False)
         response = self.client.get(reverse('imoveis-house', kwargs={
-            'category_id': imovel.category_id}
+            'pk': imovel.pk}
                             ))
         self.assertEqual(response.status_code, 404)
 
     def test_detail_view_function_is_correct(self):
         """Testando se o método view correto é carregado"""
         view = resolve(
-              reverse('imoveis-house', kwargs={'category_id': 1})
+              reverse('imoveis-house', kwargs={'pk': 1})
                 )
-        self.assertIs(view.func, views.imovel)
+        self.assertIs(view.func.view_class, views.Detail)
 
     def test_detail_view_returns_404_if_no_unity_found(self):
         """Testando o status da página no caso de não existir imóvel cadastrado"""
         response = self.client.get(
-                reverse('imoveis-house', kwargs={'category_id': 1000})
+                reverse('imoveis-house', kwargs={'pk': 1000})
                 )
         self.assertEqual(response.status_code, 404)
 
@@ -43,7 +43,7 @@ class TestDetailPage(RentalTestBase):
         response = self.client.get(
             reverse(
             'imoveis-house',
-            kwargs={'category_id': 1}))
+            kwargs={'pk': 1}))
         content = response.content.decode('utf-8')
         # Check if one recipe exists
         self.assertIn(needed_title, content)
@@ -54,5 +54,5 @@ class TestDetailPage(RentalTestBase):
         response = self.client.get(
             reverse(
             'imoveis-house',
-            kwargs={'category_id': recipe.id}))
+            kwargs={'pk': recipe.id}))
         self.assertEqual(response.status_code, 404)

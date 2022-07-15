@@ -9,4 +9,3 @@ urlpatterns = [
     path('imovel/search/', views.ListViewSearch.as_view(), name='search'),
     path('imovel/<int:pk>/', views.Detail.as_view(), name='imoveis-house'),
 ]
-
