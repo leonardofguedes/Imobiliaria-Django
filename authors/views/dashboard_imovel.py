@@ -5,9 +5,23 @@ from django.urls import reverse
 from django.views import View
 from authors.forms.imovel_form import AuthorImovelForm
 from rental.models import Imovel
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
+class Dashboard_Imovel(View):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-class Dashboard_Edit(View):
+    def setup(self, *args, **kwargs):
+        return super().setup(*args, **kwargs)
+
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get_imovel(self, id=None):
         imovel = None
 
@@ -54,6 +68,18 @@ class Dashboard_Edit(View):
             imovel.save()
 
             messages.success(request, 'Seu imóvel foi salvo com sucesso!')
-            return redirect(reverse('authors:dashboard_imovel_edit', args=(imovel.id,))
-                            )
+            return redirect(reverse(
+                'authors:dashboard_imovel_edit', args=(imovel.id,)))
+
         return self.render_imovel(form)
+
+@method_decorator(
+    login_required(login_url='authors:login', redirect_field_name='next'),
+    name='dispatch'
+)
+class Dashboard_Delete(Dashboard_Imovel):
+    def post(self, *args, **kwargs):
+        imovel = self.get_imovel(self.request.POST.get('id'))
+        imovel.delete()
+        messages.success(self.request, 'Deleted Successfully')
+        return redirect(reverse('authors:dashboard'))

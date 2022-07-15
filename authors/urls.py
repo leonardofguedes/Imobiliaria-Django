@@ -12,17 +12,17 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path(
         'dashboard/imovel/delete/',
-        views.dashboard_imovel_delete,
+        views.Dashboard_Delete.as_view(),
         name='dashboard_imovel_delete'
     ),
     path(
         'dashboard/imovel/new/',
-        views.Dashboard_Edit.as_view(),
+        views.Dashboard_Imovel.as_view(),
         name='dashboard_imovel_new'
     ),
     path(
         'dashboard/imovel/<int:id>/edit/',
-        views.Dashboard_Edit.as_view(),
+        views.Dashboard_Imovel.as_view(),
         name='dashboard_imovel_edit'
     ),
 ]
