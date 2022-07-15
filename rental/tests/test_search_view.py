@@ -7,7 +7,7 @@ class SearchViewTest(RentalTestBase):
     def test_rental_search_uses_correct_view_function(self):
         """Testando se a view de search está correta // TDD"""
         resolved = resolve(reverse('search'))
-        self.assertIs(resolved.func, views.search)
+        self.assertIs(resolved.func.view_class, views.ListViewSearch)
 
     def test_rental_search_loads_correct_template(self):
         """Testando para conferir se o template de search está sendo carregado"""
@@ -25,7 +25,7 @@ class SearchViewTest(RentalTestBase):
         url = reverse('search') + '?q=<Teste>'
         response = self.client.get(url)
         self.assertIn(
-            'Search for &quot;&lt;Teste&gt;&quot;',
+            'Procure por &quot;&lt;Teste&gt;&quot;',
             response.content.decode('utf-8')
         )
 

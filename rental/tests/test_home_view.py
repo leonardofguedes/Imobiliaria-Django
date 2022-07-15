@@ -3,11 +3,12 @@ from rental import views
 from rental.tests.test_base import RentalTestBase
 from unittest.mock import patch
 
+
 class RentalViewTest(RentalTestBase):
     def test_rental_home_view_is_correct(self):
         """Testando se a view correta é carregada em Home"""
         view = resolve(reverse('imobiliaria-home'))
-        self.assertIs(view.func, views.home)
+        self.assertIs(view.func.view_class, views.ListViewBase)
 
     def test_rental_home_shows_no_unity_found_if_no_unity(self):
         """Testando home quando não houver imóveis cadastrados"""
