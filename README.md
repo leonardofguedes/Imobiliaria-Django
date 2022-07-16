@@ -23,8 +23,8 @@ pip install -r requirements.txt
 
 1. Sistema de testes [CUMPRIDO]
 2. Aplicação de funcionalidades a search bar [CUMPRIDO]
-3. Criação do menu
-4. Criação do login do usuário
+3. Criação do menu [CUMPRIDO]
+4. Criação do login do usuário [CUMPRIDO]
 
 
 ## 🛠️ Construído com
