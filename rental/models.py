@@ -53,7 +53,7 @@ class Imovel(models.Model):
         return self.title
 
     def get_absolute_url(self):
-       return reverse('imoveis-house', args=(self.category_id,))
+       return reverse('imoveis-house', args=(self.pk,))
 
     def save(self, *args, **kwargs):
         if not self.slug:

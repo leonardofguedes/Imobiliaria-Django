@@ -19,6 +19,6 @@ class ImovelAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug": ('title','city',)
     }
-admin.site.register(Photo)
+
 admin.site.register(Category, CategoryAdmin)
 
