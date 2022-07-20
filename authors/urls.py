@@ -25,6 +25,11 @@ urlpatterns = [
         views.Dashboard_Imovel.as_view(),
         name='dashboard_imovel_edit'
     ),
+    path(
+        'profile/<int:id>/',
+        views.ProfileView.as_view(),
+        name='profile',
+    ),
 ]
 
 
