@@ -18,8 +18,14 @@
 
     <div class="imovel-author">
         <span class="imovel-author-item">
+             {% if recipe.author.profile %}
+                <a href="{% url 'authors:profile' recipe.author.profile.id %}">
+             {% endif %}
             <i class="fas fa-user"></i>
             {{ imovel.author.first_name }} {{ imovel.author.last_name}}
+                {% if recipe.author.profile %}
+                    </a>
+                {% endif %}
         </span>
         <span class="imovel-author-item">
             <i class="fas fa-calendar-alt"></i>

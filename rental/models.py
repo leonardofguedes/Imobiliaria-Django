@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=65)
 
@@ -48,6 +49,7 @@ class Imovel(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
     )
+    #tags = models.ManyToManyField(Tag, blank=True, default='') # noqa
 
     def __str__(self):
         return self.title
