@@ -23,14 +23,9 @@ pip install -r requirements.txt
 
 1. Sistema de testes [CUMPRIDO]
 2. Aplicação de funcionalidades a search bar [CUMPRIDO]
-3. Criação do menu
-4. Criação do login do usuário
+3. Criação do menu [CUMPRIDO]
+4. Criação do login do usuário [CUMPRIDO]
 
-
-## 🛠️ Construído com
-
-Como pontuado acima, a integração foi feito a base de Django (ouié!). O front foi feito a base de unha. Sim, eu não entendo de front-end, mas fiz o HTML e CSS 
-o melhor possível. Obs: Estou buscando um parceiro para trabalhar nessa parte. Se for você, me chama no email do perfil.
 
 ## ✒️ Autores
 
