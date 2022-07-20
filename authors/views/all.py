@@ -90,7 +90,6 @@ def logout_view(request):
 @login_required(login_url='authors:login', redirect_field_name='next')
 def dashboard(request):
     imoveis = Imovel.objects.filter(
-        is_published=False,
         author=request.user
     )
     return render(request, 'authors/pages/dashboard.html',

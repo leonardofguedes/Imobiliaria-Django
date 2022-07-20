@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -16,18 +17,20 @@ class Dashboard_Imovel(View):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
     def setup(self, *args, **kwargs):
         return super().setup(*args, **kwargs)
 
+
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
 
     def get_imovel(self, id=None):
         imovel = None
 
         if id is not None:
             imovel = Imovel.objects.filter(
-                is_published=False,
                 author=self.request.user,
                 pk=id,
             ).first()
@@ -60,16 +63,20 @@ class Dashboard_Imovel(View):
         )
 
         if form.is_valid():
-            # Agora, o form é válido e eu posso tentar salvar
             imovel = form.save(commit=False)
-
             imovel.author = request.user
-            imovel.is_published = False
-            imovel.save()
+            if imovel.author.is_staff:
+                imovel.save()
+                messages.success(request, 'Seu imóvel foi salvo com sucesso!')
+                return redirect(reverse(
+                    'authors:dashboard_imovel_edit', args=(imovel.id,)))
+            if imovel.author.is_staff == False:
+                imovel.is_published = False
+                imovel.save()
 
-            messages.success(request, 'Seu imóvel foi salvo com sucesso!')
-            return redirect(reverse(
-                'authors:dashboard_imovel_edit', args=(imovel.id,)))
+                messages.success(request, 'Seu imóvel foi salvo com sucesso!')
+                return redirect(reverse(
+                    'authors:dashboard_imovel_edit', args=(imovel.id,)))
 
         return self.render_imovel(form)
 
