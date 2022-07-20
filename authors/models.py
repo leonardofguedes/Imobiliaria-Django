@@ -8,3 +8,6 @@ class Profile(models.Model):
     bio = models.TextField(default='', blank=True)
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
     phoneNumber = models.CharField(validators=[phoneNumberRegex], max_length=16, unique=True)
+
+    def __str__(self):
+        return self.author
