@@ -4,7 +4,9 @@
 
 {% block content %}
   <div class="main-content center container">
-    <h2>Profile</h2>
+    <h2>{{ profile.author.username }}</h2>
+    <p>{{ profile.bio }}</p>
+    <p>{{ profile.phoneNumber }}</p>
   </div>
 
 {% endblock content %} 
