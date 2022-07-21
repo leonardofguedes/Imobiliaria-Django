@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from djmoney.models.fields import MoneyField
 from django.urls import reverse
 from django.utils.text import slugify
-
+from tag.models import Tag
 
 
 class Category(models.Model):
@@ -49,7 +49,7 @@ class Imovel(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
     )
-    #tags = models.ManyToManyField(Tag, blank=True, default='') # noqa
+    tags = models.ManyToManyField(Tag, blank=True, default='') # noqa
 
     def __str__(self):
         return self.title
