@@ -2,11 +2,9 @@
 
 
     {% if is_detail_page is True %}
-
     {% include 'rental/partials/detail_page_photos.html' %}
 
     {% else %}
-
     {% if imovel.cover %}
     <div class="imovel-cover">
         <a href="{% url 'imoveis-house' imovel.pk %}">
@@ -17,16 +15,18 @@
     {% endif %}
 
     <div class="imovel-author">
-        <span class="imovel-author-item">
-             {% if recipe.author.profile %}
-                <a href="{% url 'authors:profile' recipe.author.profile.id %}">
-             {% endif %}
-            <i class="fas fa-user"></i>
-            {{ imovel.author.first_name }} {{ imovel.author.last_name}}
-                {% if recipe.author.profile %}
-                    </a>
-                {% endif %}
-        </span>
+        {% if imovel.author is not None %}
+            <span class="imovel-author-item">
+                 {% if recipe.author.profile %}
+                    <a href="{% url 'authors:profile' imovel.author.profile.id %}">
+                 {% endif %}
+                <i class="fas fa-user"></i>
+                {{ imovel.author.first_name }} {{ imovel.author.last_name}}
+                    {% if recipe.author.profile %}
+                        </a>
+                    {% endif %}
+            </span>
+        {% endif %}
         <span class="imovel-author-item">
             <i class="fas fa-calendar-alt"></i>
             {{ imovel.created_at|date:"d/m/Y" }} às {{ imovel.created_at|date:"H:i" }}
