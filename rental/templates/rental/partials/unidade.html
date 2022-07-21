@@ -17,7 +17,7 @@
     <div class="imovel-author">
         {% if imovel.author is not None %}
             <span class="imovel-author-item">
-                 {% if recipe.author.profile %}
+                 {% if imovel.author.profile %}
                     <a href="{% url 'authors:profile' imovel.author.profile.id %}">
                  {% endif %}
                 <i class="fas fa-user"></i>
