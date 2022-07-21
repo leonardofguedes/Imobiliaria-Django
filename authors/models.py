@@ -10,4 +10,4 @@ class Profile(models.Model):
     phoneNumber = models.CharField(validators=[phoneNumberRegex], max_length=16, unique=True)
 
     def __str__(self):
-        return self.author
+        return f'{self.author.first_name} {self.author.last_name}'
