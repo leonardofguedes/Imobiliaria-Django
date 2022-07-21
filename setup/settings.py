@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'authors',
     'address',
     'djmoney',
+    'tag',
 ]
 
 MIDDLEWARE = [
