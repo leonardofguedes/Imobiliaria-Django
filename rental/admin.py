@@ -1,12 +1,10 @@
 from django.contrib import admin
-from .models import ModelImage, Photo, Imovel
+from .models import ModelImage, Imovel
 
 
 class ModelImageAdmin(admin.StackedInline):
     model = ModelImage
 
-class PhotoAdmin(admin.ModelAdmin):
-    model = Photo
 
 @admin.register(Imovel)
 class ImovelAdmin(admin.ModelAdmin):
