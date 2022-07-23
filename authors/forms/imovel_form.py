@@ -18,7 +18,7 @@ class AuthorImovelForm(forms.ModelForm):
         model = Imovel
         fields = 'title', 'description', 'financible', 'category', \
             'area', 'price', 'street', 'city', 'district', \
-            'cover', 'photo'
+            'cover',
         widgets = {
             'cover': forms.FileInput(
                 attrs={
