@@ -6,13 +6,6 @@ from django.utils.text import slugify
 from tag.models import Tag
 
 
-class Photo(models.Model):
-    main_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/main_photos/%Y/%m/%d/')
-    second_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/second_photos/%Y/%m/%d/')
-    third_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/third_photos/%Y/%m/%d/')
-    fourth_photo = models.ImageField(null=True, blank=True, upload_to='imoveis/fourth_photos/%Y/%m/%d/')
-
-
 class Imovel(models.Model):
     FINAN = (
         ('Sim', 'Sim'),
@@ -44,7 +37,6 @@ class Imovel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     cover = models.ImageField(upload_to='imoveis/covers/%Y/%m/%d/', blank=True, default='')
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='photos', null=True, blank=True, default='')
     category = models.CharField(choices=CATEGO, blank=False, null=False, default='Desconhecido', max_length=30)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
