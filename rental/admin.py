@@ -1,8 +1,6 @@
 from django.contrib import admin
-from .models import Imovel, Category, Photo
+from .models import Imovel, Photo
 
-class CategoryAdmin(admin.ModelAdmin):
-    ...
 
 class PhotoAdmin(admin.ModelAdmin):
     model = Photo
@@ -20,5 +18,4 @@ class ImovelAdmin(admin.ModelAdmin):
         "slug": ('title','city',)
     }
 
-admin.site.register(Category, CategoryAdmin)
 
