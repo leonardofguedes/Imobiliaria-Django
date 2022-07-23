@@ -12,6 +12,7 @@ class Photo(models.Model):
     third_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/third_photos/%Y/%m/%d/')
     fourth_photo = models.ImageField(null=True, blank=True, upload_to='imoveis/fourth_photos/%Y/%m/%d/')
 
+
 class Imovel(models.Model):
     FINAN = (
         ('Sim', 'Sim'),
@@ -61,3 +62,8 @@ class Imovel(models.Model):
             slug = slugify(f'{self.title}+(-{self.district})+(-{self.city}')
             self.slug = slug
         return super().save(*args, **kwargs)
+
+
+class ModelImage(models.Model):
+    post = models.ForeignKey(Imovel, default=None, on_delete=models.CASCADE)
+    images = models.FileField(upload_to='imoveis/pics/%Y/%m/%d/', blank=True, default='')
