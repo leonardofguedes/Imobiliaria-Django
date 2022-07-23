@@ -6,12 +6,6 @@ from django.utils.text import slugify
 from tag.models import Tag
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=65)
-
-    def __str__(self):
-        return self.name
-
 class Photo(models.Model):
     main_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/main_photos/%Y/%m/%d/')
     second_photo = models.ImageField(null=True, blank=True, upload_to ='imoveis/second_photos/%Y/%m/%d/')
@@ -23,6 +17,13 @@ class Imovel(models.Model):
         ('Sim', 'Sim'),
         ('Não', 'Não'),
         ('Indefinido', 'Não informado')
+    )
+    CATEGO = (
+        ('Apartamento', 'Apartamento'),
+        ('Casa', 'Casa'),
+        ('Terreno', 'Terreno'),
+        ('Cobertura', 'Cobertura'),
+        ('Desconhecido', 'Desconhecido'),
     )
     title = models.CharField(max_length=65)
     description = models.CharField(max_length=265)
@@ -43,9 +44,7 @@ class Imovel(models.Model):
     is_published = models.BooleanField(default=True)
     cover = models.ImageField(upload_to='imoveis/covers/%Y/%m/%d/', blank=True, default='')
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='photos', null=True, blank=True, default='')
-    category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, blank=True, default=None
-    )
+    category = models.CharField(choices=CATEGO, blank=False, null=False, default='Desconhecido', max_length=30)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
     )
