@@ -4,6 +4,7 @@ from .django_forms import add_attr
 from collections import defaultdict
 from django.core.exceptions import ValidationError
 from utils.strings import is_positive_number
+from multiupload.fields import MultiImageField
 
 
 class AuthorImovelForm(forms.ModelForm):
@@ -18,7 +19,8 @@ class AuthorImovelForm(forms.ModelForm):
         model = Imovel
         fields = 'title', 'description', 'financible', 'category', \
             'area', 'price', 'street', 'city', 'district', \
-            'cover',
+            'cover', 'mainphoto', 'secondphoto', 'thirdphoto',\
+            'fourthphoto', 'fifphoto', 'sixphoto', 'sevphoto',
         widgets = {
             'cover': forms.FileInput(
                 attrs={
@@ -48,7 +50,6 @@ class AuthorImovelForm(forms.ModelForm):
 
         if len(title) < 5:
             self._my_errors['title'].append('Must have at least 5 chars.')
-
         return title
 
     def clean_area(self):
