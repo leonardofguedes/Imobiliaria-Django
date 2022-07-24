@@ -1,9 +1,5 @@
 from django.contrib import admin
-from .models import ModelImage, Imovel
-
-
-class ModelImageAdmin(admin.StackedInline):
-    model = ModelImage
+from .models import Imovel
 
 
 @admin.register(Imovel)
@@ -18,8 +14,5 @@ class ImovelAdmin(admin.ModelAdmin):
     prepopulated_fields = {
         "slug": ('title','city',)
     }
-    inlines = [ModelImageAdmin]
 
-@admin.register(ModelImage)
-class ModelImageAdmin(admin.ModelAdmin):
-    pass
+
