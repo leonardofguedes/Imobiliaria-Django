@@ -37,6 +37,13 @@ class Imovel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
     cover = models.ImageField(upload_to='imoveis/covers/%Y/%m/%d/', blank=True, default='')
+    mainphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    secondphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    thirdphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    fourthphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    fifphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    sixphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
+    sevphoto = models.ImageField(upload_to='imoveis/photos/%Y/%m/%d/', blank=True, default='')
     category = models.CharField(choices=CATEGO, blank=False, null=False, default='Desconhecido', max_length=30)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True
@@ -55,7 +62,3 @@ class Imovel(models.Model):
             self.slug = slug
         return super().save(*args, **kwargs)
 
-
-class ModelImage(models.Model):
-    post = models.ForeignKey(Imovel, default=None, on_delete=models.CASCADE)
-    images = models.FileField(upload_to='imoveis/pics/%Y/%m/%d/', blank=True, default='')
