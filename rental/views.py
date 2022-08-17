@@ -9,6 +9,12 @@ from django.views.generic import ListView, DetailView
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
 
+class HomeListView(ListView):
+    queryset = Imovel.objects.all()
+    context_object_name = 'imoveis'
+    paginate_by = 9
+    template_name = 'rental/pages/home.html'
+
 class ListViewBase(ListView):
     model = Imovel
     context_object_name = 'imoveis'
