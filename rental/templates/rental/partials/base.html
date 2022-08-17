@@ -8,7 +8,8 @@
     {% include 'rental/partials/search.html' %}
     <main class="main-content-container" align="center">
         {% block content %}{% endblock content %}
-        {% if is_detail_page is False %}
+        {% if is_detail_page is True %}
+        {% else %}
         {% include 'rental/partials/pagination.html' with page=page_obj %}
         {% endif %}
     </main>
