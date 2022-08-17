@@ -1,4 +1,3 @@
-from django.shortcuts import render, get_object_or_404
 from .models import Imovel
 from django.http import Http404
 from django.db.models import Q
@@ -44,8 +43,6 @@ class ListViewBase(ListView):
         )
         return ctx
 
-class ListViewHome(ListViewBase):
-    template_name = 'rental/pages/home.html'
 
 class ListViewSearch(ListViewBase):
     template_name = 'rental/pages/search.html'
@@ -61,6 +58,7 @@ class ListViewSearch(ListViewBase):
             Q(
                 Q(title__icontains=search_term) |
                 Q(description__icontains=search_term) |
+                Q(street__icontains=search_term) |
                 Q(city__icontains=search_term) |
                 Q(district__icontains=search_term),
             )
