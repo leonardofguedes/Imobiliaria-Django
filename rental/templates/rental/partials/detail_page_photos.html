@@ -1,7 +1,23 @@
 <div id="items-wrapper">
+        {% if imovel.mainphoto %}
         <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.mainphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.secondphoto %}
         <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.secondphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.thirdphoto %}
         <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.thirdphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.fourthphoto %}
         <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.fourthphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.fifphoto %}
         <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.fifphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.sixphoto %}
+        <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.sixphoto.url }}" alt="Temporário"></div>
+        {% endif %}
+        {% if imovel.sevphoto %}
+        <div href="{% url 'imoveis-house' imovel.pk %}"><img src="{{ imovel.sevphoto.url }}" alt="Temporário"></div>
+        {% endif %}
 </div>
