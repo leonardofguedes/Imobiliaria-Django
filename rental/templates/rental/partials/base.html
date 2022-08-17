@@ -8,7 +8,9 @@
     {% include 'rental/partials/search.html' %}
     <main class="main-content-container" align="center">
         {% block content %}{% endblock content %}
-        {% include 'rental/partials/pagination.html' %}
+        {% if is_detail_page is False %}
+        {% include 'rental/partials/pagination.html' with page=page_obj %}
+        {% endif %}
     </main>
     {% include 'rental/partials/footer.html' %}
     <script src="{% static 'rental/js/scripts.js' %}"></script>
